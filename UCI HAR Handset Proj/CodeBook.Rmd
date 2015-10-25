@@ -1,0 +1,49 @@
+---
+title: "UCI HAR Handset Course Project - Code Book"
+output: html_document
+---
+
+## Merge Data Set
+ 
+ 1. Load all common datasets like activity/feature into dataset
+ 2. Assign meaningful column names for each of these dataset
+ 3. Load Training and Test Datasets for X, Y and Subject into individual variables
+ 4. Bind individual dataset for X, Y and Subject into single dataset for Train and Test respectively
+ 5. Merge Train and Test datasets into one final dataset
+ 
+
+## Extract Mean and Standard Deviation for each Measurements
+
+ 1. Store all column names from final dataset into a single variable
+ 2. Identify Logical vector list based on grepl function for mean, std and required identifier columns
+ 3. Filter out all unwanted columns based on Logical vector list and keep only required mean and SD columns with other key identifier columns
+
+
+
+## Make Dataset names meaningful
+
+ 1. Add activity name to the final dataset
+ 2. Assign column names of final dataset to a variable named updatedColumnNameList
+
+
+## Labels dataset with descriptive variable names
+
+ 1. Iterate through all column names in final datasets through updatedColumnNameList
+ 2. Replace key words using pattern matching function gsub to replace the followings strings as below:
+ 
+     Old Value | New Value
+     --------- |-------------
+     "-mean"   | "Mean"
+     "-std"    | "StdDev"
+     "^f"      | "Freq_"
+     "^t"      | "Time_"
+     "-mean"   | "Mean"
+     "()"      | ""
+     "BodyBody"| "Body"
+     "Mag"     | "Magnitude"
+
+##Independent tidy data set with the average of each variable for each activity and each subject
+
+ 1. Updating descriptive column names back to Final Dataset
+ 2. Story data in new dataset named TidyDataSet by aggregarting Mean and SD columns by activity and subject
+ 3. Write table back to text file
